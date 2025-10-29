@@ -1,0 +1,30 @@
+AWS Deployment Steps:
+
+1. Launch an EC2 Instance (Ubuntu 22.04 LTS).
+2. Create and download key pair (.pem file).
+3. Connect via SSH:
+   ssh -i your-key.pem ubuntu@<EC2-PUBLIC-IP>
+
+4. Install dependencies:
+   sudo apt update
+   sudo apt install -y python3-pip python3-venv
+
+5. Upload project folder using SCP or WinSCP:
+   scp -i your-key.pem -r AWS-SCENARIO-3/ ubuntu@<EC2-PUBLIC-IP>:/home/ubuntu/
+
+6. Activate environment:
+   cd AWS-SCENARIO-3
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+
+7. Run the app:
+   python app.py
+
+8. Open in browser:
+   http://<EC2-PUBLIC-IP>:8000
+
+(Optional) To keep the app running:
+   sudo apt install -y screen
+   screen -S ai_pricing
+   python app.py
